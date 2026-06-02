@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hayatta Kalma Oyunu - 1. Tur</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #333; }
+        canvas { border: 2px solid #fff; }
+    </style>
+</head>
+<body>
+    <script>
+        let oyuncuX = 200, oyuncuY = 200, oyuncuHiz = 5;
+        let karakterGorsel, agacGorsel, tasGorsel;
+
+        function preload() {
+            // Görsellerin yüklendiğinden emin oluyoruz
+            karakterGorsel = loadImage('karakter.jpg');
+            agacGorsel = loadImage('agac.jpg');
+            tasGorsel = loadImage('tas.jpg');
+        }
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background(34, 139, 34); // Çimen zemini
+
+            // 1. Sabit nesneleri çiz (Ağaç ve Taş)
+            image(agacGorsel, 100, 100, 80, 80); // 
+            image(tasGorsel, 300, 300, 60, 60);  // 
+
+            // 2. Hareket mantığı
+            if (keyIsDown(87)) { oyuncuY -= oyuncuHiz; } // W
+            if (keyIsDown(83)) { oyuncuY += oyuncuHiz; } // S
+            if (keyIsDown(65)) { oyuncuX -= oyuncuHiz; } // A
+            if (keyIsDown(68)) { oyuncuX += oyuncuHiz; } // D
+
+            // Sınırlandırma
+            oyuncuX = constrain(oyuncuX, 0, width - 50);
+            oyuncuY = constrain(oyuncuY, 0, height - 50);
+
+            // 3. Karakteri çiz
+            image(karakterGorsel, oyuncuX, oyuncuY, 50, 50); // 
+        }
+    </script>
+</body>
+</html>
